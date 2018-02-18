@@ -1,0 +1,4 @@
+Bundle-Activator: it.dbb.common.language.activator.CommonLanguageActivator
+Bundle-Name: common-language-activator
+Bundle-SymbolicName: it.dbb.common.language.activator
+Bundle-Version: 1.0.0
