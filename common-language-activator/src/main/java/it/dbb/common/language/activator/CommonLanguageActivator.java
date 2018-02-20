@@ -11,6 +11,8 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -27,25 +29,25 @@ public class CommonLanguageActivator implements BundleActivator {
 
 		this.bundleContext = bundleContext;
 
-		serviceTracker = new ResourceBundleLoaderServiceTracker(this);
+		serviceTracker = new ResourceBundleLoaderServiceTracker();
 		serviceTracker.open();
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		
-		for (ServiceRegistration<ResourceBundleLoader> serviceRegistration : serviceRegistrations.values()) {
-			
-			serviceRegistration.unregister();
-		}
-		
+
+		serviceRegistrations.entrySet().removeIf(entry -> {
+			entry.getValue().unregister();
+			return true;
+		});
+
 		serviceTracker.close();
 	}
 
 	private class ResourceBundleLoaderServiceTracker
 			extends ServiceTracker<ResourceBundleLoader, ResourceBundleLoader> {
 
-		public ResourceBundleLoaderServiceTracker(Object host) {
+		public ResourceBundleLoaderServiceTracker() {
 
 			super(bundleContext, ResourceBundleLoader.class, null);
 		}
@@ -54,6 +56,11 @@ public class CommonLanguageActivator implements BundleActivator {
 		public ResourceBundleLoader addingService(ServiceReference<ResourceBundleLoader> reference) {
 
 			ResourceBundleLoader resourceBundleLoader = bundleContext.getService(reference);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Tracking service "
+						+ BundlePropertyUtil.getBundleSymbolicName(reference, reference.getBundle()));
+			}
 
 			if (!resourceBundleLoader.getClass().equals(CommonLanguageAggregateResourceBundleLoader.class)) {
 
@@ -65,12 +72,25 @@ public class CommonLanguageActivator implements BundleActivator {
 
 		@Override
 		public void modifiedService(ServiceReference<ResourceBundleLoader> reference, ResourceBundleLoader service) {
-			// TODO Auto-generated method stub
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Service " + BundlePropertyUtil.getBundleSymbolicName(reference, reference.getBundle())
+						+ " was modified");
+			}
+
+			// TODO
+			// what to do if a resourceBundleLoader service is being modified?
+
 			super.modifiedService(reference, service);
 		}
 
 		@Override
 		public void removedService(ServiceReference<ResourceBundleLoader> reference, ResourceBundleLoader service) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Service " + BundlePropertyUtil.getBundleSymbolicName(reference, reference.getBundle())
+						+ " was removed");
+			}
 
 			if (!service.getClass().equals(CommonLanguageAggregateResourceBundleLoader.class)) {
 
@@ -107,6 +127,11 @@ public class CommonLanguageActivator implements BundleActivator {
 				BundlePropertyUtil.getResourceBundleBaseName(serviceReference, bundle));
 		properties.put("servlet.context.name", BundlePropertyUtil.getServletContextName(serviceReference, bundle));
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Registering new service " + aggregateResourceBundleLoader.getClass().getName()
+					+ " with properties " + properties.toString());
+		}
+
 		ServiceRegistration<ResourceBundleLoader> serviceRegistration = bundleContext
 				.registerService(ResourceBundleLoader.class, aggregateResourceBundleLoader, properties);
 
@@ -119,6 +144,11 @@ public class CommonLanguageActivator implements BundleActivator {
 
 			ServiceRegistration<ResourceBundleLoader> serviceRegistration = serviceRegistrations.get(serviceReference);
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unregistering service "
+						+ BundlePropertyUtil.getBundleSymbolicName(serviceReference, serviceReference.getBundle()));
+			}
+
 			serviceRegistration.unregister();
 
 			serviceRegistrations.remove(serviceReference);
@@ -128,4 +158,5 @@ public class CommonLanguageActivator implements BundleActivator {
 	private BundleContext bundleContext;
 	private ResourceBundleLoaderServiceTracker serviceTracker;
 	private Map<ServiceReference<ResourceBundleLoader>, ServiceRegistration<ResourceBundleLoader>> serviceRegistrations;
+	private static final Log _log = LogFactoryUtil.getLog(CommonLanguageActivator.class);
 }
