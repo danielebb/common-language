@@ -7,16 +7,21 @@ import java.util.Map;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.Validator;
 
 import it.dbb.common.language.bundleloader.CommonLanguageAggregateResourceBundleLoader;
+import it.dbb.common.language.bundleloader.api.CommonLanguageLoader;
 import it.dbb.common.language.util.BundlePropertyUtil;
 
 /**
@@ -29,8 +34,11 @@ public class CommonLanguageActivator implements BundleActivator {
 
 		this.bundleContext = bundleContext;
 
-		serviceTracker = new ResourceBundleLoaderServiceTracker();
-		serviceTracker.open();
+		commonLanguageServiceTracker = new CommonLanguageServiceTracker(bundleContext);
+		commonLanguageServiceTracker.open();
+
+		resourceBundleLoaderServiceTracker = new ResourceBundleLoaderServiceTracker();
+		resourceBundleLoaderServiceTracker.open();
 	}
 
 	@Override
@@ -41,7 +49,9 @@ public class CommonLanguageActivator implements BundleActivator {
 			return true;
 		});
 
-		serviceTracker.close();
+		resourceBundleLoaderServiceTracker.close();
+
+		commonLanguageServiceTracker.close();
 	}
 
 	private class ResourceBundleLoaderServiceTracker
@@ -111,7 +121,7 @@ public class CommonLanguageActivator implements BundleActivator {
 		}
 
 		CommonLanguageAggregateResourceBundleLoader aggregateResourceBundleLoader = new CommonLanguageAggregateResourceBundleLoader(
-				resourceBundleLoader);
+				commonLanguageServiceTracker, resourceBundleLoader);
 
 		String bundleSymbolicName = BundlePropertyUtil.getBundleSymbolicName(serviceReference, bundle);
 
@@ -155,8 +165,23 @@ public class CommonLanguageActivator implements BundleActivator {
 		}
 	}
 
+	private class CommonLanguageServiceTracker extends ServiceTracker<CommonLanguageLoader, CommonLanguageLoader> {
+
+		public CommonLanguageServiceTracker(BundleContext bundleContext) throws InvalidSyntaxException {
+
+			super(bundleContext,
+					FrameworkUtil
+							.createFilter("(&(" + Constants.OBJECTCLASS + "=" + CommonLanguageLoader.class.getName()
+									+ ")(it.dbb.common.language.type=" + commonLanguageType + "))"),
+					null);
+		}
+	}
+
 	private BundleContext bundleContext;
-	private ResourceBundleLoaderServiceTracker serviceTracker;
+	private ResourceBundleLoaderServiceTracker resourceBundleLoaderServiceTracker;
+	private CommonLanguageServiceTracker commonLanguageServiceTracker;
 	private Map<ServiceReference<ResourceBundleLoader>, ServiceRegistration<ResourceBundleLoader>> serviceRegistrations;
+	private final String commonLanguageType = PrefsPropsUtil.getString("common.language.resource.loader.type",
+			"static");
 	private static final Log _log = LogFactoryUtil.getLog(CommonLanguageActivator.class);
 }
