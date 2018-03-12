@@ -16,7 +16,8 @@ import org.osgi.util.tracker.ServiceTracker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -181,7 +182,7 @@ public class CommonLanguageActivator implements BundleActivator {
 	private ResourceBundleLoaderServiceTracker resourceBundleLoaderServiceTracker;
 	private CommonLanguageServiceTracker commonLanguageServiceTracker;
 	private Map<ServiceReference<ResourceBundleLoader>, ServiceRegistration<ResourceBundleLoader>> serviceRegistrations;
-	private final String commonLanguageType = PrefsPropsUtil.getString("common.language.resource.loader.type",
+	private final String commonLanguageType = GetterUtil.get(PropsUtil.get("common.language.resource.loader.type"),
 			"static");
 	private static final Log _log = LogFactoryUtil.getLog(CommonLanguageActivator.class);
 }
