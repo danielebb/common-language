@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="it.dbb.common.language.loader.db.service.impl.LanguageLocalServiceImpl" id="it.dbb.common.language.loader.db.service.LanguageLocalService" />
+	<bean class="it.dbb.common.language.loader.db.service.impl.LanguageServiceImpl" id="it.dbb.common.language.loader.db.service.LanguageService" />
+	<bean class="it.dbb.common.language.loader.db.service.persistence.impl.LanguagePersistenceImpl" id="it.dbb.common.language.loader.db.service.persistence.LanguagePersistence" parent="basePersistence" />
+</beans>
