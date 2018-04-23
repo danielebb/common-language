@@ -1,6 +1,6 @@
 Bundle-Activator: it.dbb.common.language.activator.CommonLanguageActivator
 Bundle-Name: common-language-activator
 Bundle-SymbolicName: it.dbb.common.language.activator
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Export-Package: \
 	it.dbb.common.language.bundleloader.api

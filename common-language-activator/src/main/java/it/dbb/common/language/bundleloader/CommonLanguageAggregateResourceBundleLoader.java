@@ -1,11 +1,13 @@
 package it.dbb.common.language.bundleloader;
 
+import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -19,21 +21,27 @@ public class CommonLanguageAggregateResourceBundleLoader implements ResourceBund
 	public CommonLanguageAggregateResourceBundleLoader(
 			ServiceTracker<CommonLanguageLoader, CommonLanguageLoader> serviceTracker,
 			ResourceBundleLoader resourceBundleLoader) {
-		
+
 		this.serviceTracker = serviceTracker;
 		this.baseResourceBundleLoader = resourceBundleLoader;
 	}
 
-	@Override
 	public ResourceBundle loadResourceBundle(String languageId) {
 
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		return loadResourceBundle(locale);
+	}
+
+	public ResourceBundle loadResourceBundle(Locale locale) {
+
 		ResourceBundle commonLanguageResourceBundle = null;
-		ResourceBundle baseResourceBundle = loadResourceBundle(baseResourceBundleLoader, languageId);
+		ResourceBundle baseResourceBundle = loadResourceBundle(baseResourceBundleLoader, locale);
 
 		if (!serviceTracker.isEmpty()) {
 
 			commonLanguageResourceBundle = loadResourceBundle(serviceTracker.getService().getResourceBundleLoader(),
-					languageId);
+					locale);
 		}
 
 		if (commonLanguageResourceBundle != null && baseResourceBundle != null) {
@@ -50,13 +58,17 @@ public class CommonLanguageAggregateResourceBundleLoader implements ResourceBund
 		}
 
 		throw new MissingResourceException(
-				"Resource bundle loader " + this + " was unable to load " + "resource bundle for " + languageId,
-				StringPool.BLANK, languageId);
+				"Resource bundle loader " + this + " was unable to load " + "resource bundle for " + locale,
+				StringPool.BLANK, locale.toString());
 	}
 
-	protected ResourceBundle loadResourceBundle(ResourceBundleLoader resourceBundleLoader, String languageId) {
+	protected ResourceBundle loadResourceBundle(ResourceBundleLoader resourceBundleLoader, Locale locale) {
 
 		try {
+
+			// retrocompatibility
+
+			String languageId = LocaleUtil.toLanguageId(locale);
 
 			ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(languageId);
 
