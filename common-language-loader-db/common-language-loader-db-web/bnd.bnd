@@ -1,4 +1,4 @@
 Bundle-Name: common-language-loader-db-web
 Bundle-SymbolicName: it.dbb.common.language.db.web
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.0
 Export-Package: it.dbb.common.language.loader.db.constants

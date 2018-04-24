@@ -1,11 +1,14 @@
 package it.dbb.common.language.loader.db.internal;
 
+import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.util.CacheResourceBundleLoader;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 
 import it.dbb.common.language.bundleloader.api.CommonLanguageLoader;
@@ -23,7 +26,11 @@ public class DatabaseCommonLanguageLoader implements CommonLanguageLoader {
 
 	private class DatabaseResourceBundleLoader implements ResourceBundleLoader {
 
-		@Override
+		public ResourceBundle loadResourceBundle(Locale locale) {
+			
+			return loadResourceBundle(LocaleUtil.toLanguageId(locale));
+		}
+		
 		public ResourceBundle loadResourceBundle(String languageId) {
 			
 			return new DatabaseResourceBundle(languageLocalService, languageId);
@@ -32,4 +39,10 @@ public class DatabaseCommonLanguageLoader implements CommonLanguageLoader {
 	
 	@Reference(unbind = "-")
 	protected LanguageLocalService languageLocalService;
+
+	@Override
+	public void initResourceBundles(ResourceBundle parentResourceBundle, Map<String, String> bundleProperties) {
+		// TODO Auto-generated method stub
+		
+	}
 }

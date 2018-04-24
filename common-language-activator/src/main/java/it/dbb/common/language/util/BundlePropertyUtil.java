@@ -4,6 +4,7 @@ import java.util.Dictionary;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
 
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -43,6 +44,20 @@ public class BundlePropertyUtil {
 		}
 
 		return property;
+	}
+	
+	public static String getNextServiceRanking(ServiceReference<?> serviceReference, Bundle bundle) {
+		
+		String property = getBundleProperty(Constants.SERVICE_RANKING, null, serviceReference, bundle);
+		
+		if(Validator.isNull(property)) {
+			
+			return "100";
+		}
+		
+		int ranking = GetterUtil.getInteger(property);
+		
+		return String.valueOf(ranking + 100);
 	}
 
 	public static String getBundleProperty(String propertyKey, String headerKey, ServiceReference<?> serviceReference,

@@ -1,5 +1,6 @@
 package it.dbb.common.language.bundleloader;
 
+import java.util.Hashtable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -20,7 +21,7 @@ public class CommonLanguageAggregateResourceBundleLoader implements ResourceBund
 
 	public CommonLanguageAggregateResourceBundleLoader(
 			ServiceTracker<CommonLanguageLoader, CommonLanguageLoader> serviceTracker,
-			ResourceBundleLoader resourceBundleLoader) {
+			ResourceBundleLoader resourceBundleLoader, Hashtable<String, Object> bundleProperties) {
 
 		this.serviceTracker = serviceTracker;
 		this.baseResourceBundleLoader = resourceBundleLoader;
@@ -60,6 +61,7 @@ public class CommonLanguageAggregateResourceBundleLoader implements ResourceBund
 		throw new MissingResourceException(
 				"Resource bundle loader " + this + " was unable to load " + "resource bundle for " + locale,
 				StringPool.BLANK, locale.toString());
+
 	}
 
 	protected ResourceBundle loadResourceBundle(ResourceBundleLoader resourceBundleLoader, Locale locale) {

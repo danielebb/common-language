@@ -67,7 +67,7 @@ public class CommonLanguageActivator implements BundleActivator {
 		public ResourceBundleLoader addingService(ServiceReference<ResourceBundleLoader> reference) {
 
 			ResourceBundleLoader resourceBundleLoader = bundleContext.getService(reference);
-
+			
 			if (_log.isDebugEnabled()) {
 				_log.debug("Tracking service "
 						+ BundlePropertyUtil.getBundleSymbolicName(reference, reference.getBundle()));
@@ -121,22 +121,23 @@ public class CommonLanguageActivator implements BundleActivator {
 			serviceRegistrations = new HashMap<>();
 		}
 
-		CommonLanguageAggregateResourceBundleLoader aggregateResourceBundleLoader = new CommonLanguageAggregateResourceBundleLoader(
-				commonLanguageServiceTracker, resourceBundleLoader);
-
 		String bundleSymbolicName = BundlePropertyUtil.getBundleSymbolicName(serviceReference, bundle);
-
+		
 		if (Validator.isNull(bundleSymbolicName) || serviceRegistrations.containsKey(serviceReference)) {
-
+			
 			return;
 		}
-
+		
 		Hashtable<String, Object> properties = new Hashtable<>();
-
+		
 		properties.put("bundle.symbolic.name", bundleSymbolicName);
 		properties.put("resource.bundle.base.name",
 				BundlePropertyUtil.getResourceBundleBaseName(serviceReference, bundle));
 		properties.put("servlet.context.name", BundlePropertyUtil.getServletContextName(serviceReference, bundle));
+		properties.put(Constants.SERVICE_RANKING, BundlePropertyUtil.getNextServiceRanking(serviceReference, bundle));
+		
+		CommonLanguageAggregateResourceBundleLoader aggregateResourceBundleLoader = new CommonLanguageAggregateResourceBundleLoader(
+				commonLanguageServiceTracker, resourceBundleLoader, properties);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Registering new service " + aggregateResourceBundleLoader.getClass().getName()

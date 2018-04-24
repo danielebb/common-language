@@ -1,5 +1,8 @@
 package it.dbb.common.language.loader.statics;
 
+import java.util.Map;
+import java.util.ResourceBundle;
+
 import com.liferay.portal.kernel.util.CacheResourceBundleLoader;
 import com.liferay.portal.kernel.util.ClassResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
@@ -24,5 +27,11 @@ public class BaseStaticCommonLanguageLoader implements CommonLanguageLoader {
 
 	private ResourceBundleLoader staticBundleLoader = new CacheResourceBundleLoader(
 			new ClassResourceBundleLoader(getResourceLanguagePath(), this.getClass().getClassLoader()));
+
+	@Override
+	public void initResourceBundles(ResourceBundle parentResourceBundle, Map<String, String> bundleProperties) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

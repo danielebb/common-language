@@ -1,6 +1,6 @@
 Bundle-Name: common-language-loader-db-api
 Bundle-SymbolicName: it.dbb.common.language.db.api
-Bundle-Version: 1.0.0
+Bundle-Version: 1.1.0
 Export-Package: \
 	it.dbb.common.language.loader.db.exception,\
 	it.dbb.common.language.loader.db.model,\
