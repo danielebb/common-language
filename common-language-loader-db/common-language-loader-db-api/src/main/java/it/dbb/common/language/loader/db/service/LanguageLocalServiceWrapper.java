@@ -292,6 +292,11 @@ public class LanguageLocalServiceWrapper implements LanguageLocalService,
 		return _languageLocalService.findByLanguageCode(languageCode);
 	}
 
+	@Override
+	public java.util.List<java.lang.String> getAvailableLanguageIds() {
+		return _languageLocalService.getAvailableLanguageIds();
+	}
+
 	/**
 	* Returns a range of all the languages.
 	*

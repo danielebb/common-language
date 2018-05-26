@@ -1,0 +1,9 @@
+Bundle-Activator: it.dbb.common.language.loader.db.activator.DatabaseCommonLanguageLoaderActivator
+Bundle-Name: common-language-loader-db-activator
+Bundle-SymbolicName: it.dbb.common.language.db.activator
+Bundle-Version: 1.2.0
+
+Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\
+		com.liferay.portal.kernel.model; version="[2,3)",\
+		com.liferay.portal.kernel.service; version="[1,3)",\
+		*

@@ -272,6 +272,10 @@ public class LanguageLocalServiceUtil {
 		return getService().findByLanguageCode(languageCode);
 	}
 
+	public static java.util.List<java.lang.String> getAvailableLanguageIds() {
+		return getService().getAvailableLanguageIds();
+	}
+
 	/**
 	* Returns a range of all the languages.
 	*

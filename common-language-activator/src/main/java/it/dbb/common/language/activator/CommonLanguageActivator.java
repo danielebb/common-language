@@ -8,21 +8,17 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.util.tracker.ServiceTracker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.Validator;
 
 import it.dbb.common.language.bundleloader.CommonLanguageAggregateResourceBundleLoader;
-import it.dbb.common.language.bundleloader.api.CommonLanguageLoader;
+import it.dbb.common.language.service.tracker.CommonLanguageServiceTracker;
 import it.dbb.common.language.util.BundlePropertyUtil;
 
 /**
@@ -167,23 +163,9 @@ public class CommonLanguageActivator implements BundleActivator {
 		}
 	}
 
-	private class CommonLanguageServiceTracker extends ServiceTracker<CommonLanguageLoader, CommonLanguageLoader> {
-
-		public CommonLanguageServiceTracker(BundleContext bundleContext) throws InvalidSyntaxException {
-
-			super(bundleContext,
-					FrameworkUtil
-							.createFilter("(&(" + Constants.OBJECTCLASS + "=" + CommonLanguageLoader.class.getName()
-									+ ")(it.dbb.common.language.type=" + commonLanguageType + "))"),
-					null);
-		}
-	}
-
 	private BundleContext bundleContext;
 	private ResourceBundleLoaderServiceTracker resourceBundleLoaderServiceTracker;
 	private CommonLanguageServiceTracker commonLanguageServiceTracker;
 	private Map<ServiceReference<ResourceBundleLoader>, ServiceRegistration<ResourceBundleLoader>> serviceRegistrations;
-	private final String commonLanguageType = GetterUtil.get(PropsUtil.get("common.language.resource.loader.type"),
-			"static");
 	private static final Log _log = LogFactoryUtil.getLog(CommonLanguageActivator.class);
 }

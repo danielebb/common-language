@@ -17,6 +17,8 @@ package it.dbb.common.language.loader.db.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -89,5 +91,14 @@ public class LanguageLocalServiceImpl extends LanguageLocalServiceBaseImpl {
 	public Language getByLanguageCodeKey(String languageCode, String key) throws PortalException {
 		
 		return languagePersistence.findByLanguageCodeKey(languageCode, key);
+	}
+	
+	public List<String> getAvailableLanguageIds() {
+		
+		DynamicQuery dq = dynamicQuery();
+		
+		dq.setProjection(ProjectionFactoryUtil.groupProperty("languageCode"));
+		
+		return dynamicQuery(dq);
 	}
 }

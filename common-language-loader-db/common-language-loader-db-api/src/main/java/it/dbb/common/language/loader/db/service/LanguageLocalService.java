@@ -239,6 +239,9 @@ public interface LanguageLocalService extends BaseLocalService,
 
 	public List<Language> findByLanguageCode(java.lang.String languageCode);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<java.lang.String> getAvailableLanguageIds();
+
 	/**
 	* Returns a range of all the languages.
 	*
