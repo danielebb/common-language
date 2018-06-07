@@ -1,6 +1,7 @@
-Bundle-Name: common-language-loader-db-service
+Bundle-Name: Common Language Database Service
+GroupId: it.dbb.common.language
 Bundle-SymbolicName: it.dbb.common.language.db.service
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.1
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
 

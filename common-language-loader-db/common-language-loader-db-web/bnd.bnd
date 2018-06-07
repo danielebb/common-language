@@ -1,6 +1,7 @@
-Bundle-Name: common-language-loader-db-web
+Bundle-Name: Common Language Database Web
+GroupId: it.dbb.common.language
 Bundle-SymbolicName: it.dbb.common.language.db.web
-Bundle-Version: 1.2.0
+Bundle-Version: 1.2.1
 Export-Package: it.dbb.common.language.loader.db.constants
 
 Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\

@@ -4,3 +4,8 @@ dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.68.0"
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "6.0.0"
 }
+
+if((new File("$rootProject.projectDir/publishing.gradle")).exists()) {
+
+	apply from: "$rootProject.projectDir/publishing.gradle"
+}
