@@ -1,7 +1,12 @@
 dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "6.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.68.0"
-	
-	compileOnly project(":apps:common-language:common-language-loader-db:common-language-loader-db-api")
-	compileOnly project(":apps:common-language:common-language-activator")
+
+	compile "it.dbb.common.language:common-language-loader-db-api:1.2.1"
+	compile "it.dbb.common.language:common-language-activator:1.2.1"
+}
+
+if((new File("$rootProject.projectDir/publishing.gradle")).exists()) {
+
+	apply from: "$rootProject.projectDir/publishing.gradle"
 }
