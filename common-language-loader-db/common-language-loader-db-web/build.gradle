@@ -8,7 +8,7 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.application.list.api", version: "2.2.4"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "2.0.0"
 
-	compile "it.dbb.common.language:common-language-loader-db-api:1.2.1"
+	compile project(":common-language:common-language-loader-db:common-language-loader-db-api")
 }
 
 if((new File("$rootProject.projectDir/publishing.gradle")).exists()) {
