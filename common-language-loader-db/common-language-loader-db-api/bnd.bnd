@@ -1,7 +1,7 @@
 Bundle-Name: Common Language Database API
 GroupId: it.dbb.common.language
 Bundle-SymbolicName: it.dbb.common.language.db.api
-Bundle-Version: 1.2.1
+Bundle-Version: 1.2.2
 Export-Package: \
 	it.dbb.common.language.loader.db.exception,\
 	it.dbb.common.language.loader.db.model,\

@@ -1,7 +1,7 @@
 Bundle-Name: Common Language Static
 GroupId: it.dbb.common.language
 Bundle-SymbolicName: it.dbb.common.language.loader.statics
-Bundle-Version: 1.2.1
+Bundle-Version: 1.2.2
 Export-Package: it.dbb.common.language.loader.statics
 
 Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\
