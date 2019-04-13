@@ -1,0 +1,5 @@
+Bundle-Name: Common Language Provider Resource
+GroupId: it.dbb.common.language
+Bundle-SymbolicName: it.dbb.common.language.provider.resource
+Bundle-Version: 2.0.0
+Export-Package: it.dbb.common.language.provider.resource

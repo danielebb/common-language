@@ -1,0 +1,6 @@
+Bundle-Name: Common Language Core
+GroupId: it.dbb.common.language
+Bundle-SymbolicName: it.dbb.common.language.core
+Bundle-Version: 2.0.0
+
+Export-Package: it.dbb.common.language.core.util

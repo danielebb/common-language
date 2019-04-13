@@ -1,0 +1,8 @@
+Bundle-Name: Common Language API
+GroupId: it.dbb.common.language
+Bundle-SymbolicName: it.dbb.common.language.api
+Bundle-Version: 2.0.0
+Export-Package: \
+	it.dbb.common.language.api,\
+	it.dbb.common.language.api.model,\
+	it.dbb.common.language.api.base
