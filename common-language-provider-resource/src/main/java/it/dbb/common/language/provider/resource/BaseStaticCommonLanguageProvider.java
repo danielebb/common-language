@@ -17,7 +17,13 @@ import java.util.function.Consumer;
  * @author danielebb
  */
 public class BaseStaticCommonLanguageProvider implements CommonResourceBundleProvider {
-
+	
+	/**
+	 * The path where to search for Language properties files.
+	 * Default is <b>common.Language</b>
+	 *
+	 * @return the resources language path
+	 */
 	protected String getResourceLanguagePath() {
 
 		return "common.Language";

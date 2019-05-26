@@ -92,7 +92,7 @@ public class CommonResourceBundleLoaderRegistrar {
         @Override
         public ResourceBundleLoader addingService(ServiceReference<ResourceBundleLoader> reference) {
             
-            ResourceBundleLoader resourceBundleLoader = getService(reference);
+            ResourceBundleLoader resourceBundleLoader = super.addingService(reference);
             
             if (_log.isDebugEnabled()) {
                 
@@ -104,7 +104,7 @@ public class CommonResourceBundleLoaderRegistrar {
                 publishCommonResourceBundleLoader(reference, resourceBundleLoader, reference.getBundle());
             }
             
-            return super.addingService(reference);
+            return resourceBundleLoader;
         }
         
         @Override

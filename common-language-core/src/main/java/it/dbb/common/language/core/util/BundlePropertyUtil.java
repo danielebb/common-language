@@ -46,18 +46,18 @@ public class BundlePropertyUtil {
 		return property;
 	}
 	
-	public static String getNextServiceRanking(ServiceReference<?> serviceReference, Bundle bundle) {
+	public static int getNextServiceRanking(ServiceReference<?> serviceReference, Bundle bundle) {
 		
 		String property = getBundleProperty(Constants.SERVICE_RANKING, null, serviceReference, bundle);
 		
 		if(Validator.isNull(property)) {
 			
-			return "100";
+			return 100;
 		}
 		
 		int ranking = GetterUtil.getInteger(property);
 		
-		return String.valueOf(ranking + 100);
+		return ranking + 100;
 	}
 
 	public static String getBundleProperty(String propertyKey, String headerKey, ServiceReference<?> serviceReference,
