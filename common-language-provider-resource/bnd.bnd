@@ -4,5 +4,5 @@ Bundle-SymbolicName: it.dbb.common.language.provider.resource
 Bundle-Version: 2.0.0
 Export-Package: it.dbb.common.language.provider.resource
 
-Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\
+Import-Package: com.liferay.portal.kernel.util; version="[8,10)",\
         *

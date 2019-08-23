@@ -46,7 +46,7 @@ public class BaseStaticCommonLanguageProvider implements CommonResourceBundlePro
 			
 			if (language != null) {
 				
-				for (Locale locale : language.getSupportedLocales()) {
+				for (Locale locale : language.getAvailableLocales()) {
 					
 					try {
 						

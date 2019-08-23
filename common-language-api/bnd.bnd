@@ -7,5 +7,5 @@ Export-Package: \
 	it.dbb.common.language.api.model,\
 	it.dbb.common.language.api.base
 
-Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\
+Import-Package: com.liferay.portal.kernel.util; version="[8,10)",\
         *

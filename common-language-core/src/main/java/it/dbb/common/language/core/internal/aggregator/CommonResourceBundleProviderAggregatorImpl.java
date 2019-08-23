@@ -52,7 +52,7 @@ public class CommonResourceBundleProviderAggregatorImpl implements CommonResourc
         
             return commonResourceBundleProvider.getResourceBundle(locale);
             
-        }).toArray(ResourceBundle[]::new);
+        }).filter(Objects::nonNull).toArray(ResourceBundle[]::new);
     
         AggregateResourceBundle aggregateResourceBundle = new AggregateResourceBundle(resourceBundles);
         

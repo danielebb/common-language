@@ -5,5 +5,5 @@ Bundle-Version: 2.0.0
 
 Export-Package: it.dbb.common.language.core.util
 
-Import-Package: com.liferay.portal.kernel.util; version="[8,9)",\
+Import-Package: com.liferay.portal.kernel.util; version="[8,10)",\
         *
