@@ -1,0 +1,2 @@
+create unique index IX_5AB44326 on INTERNATIONAL_Translation (language[$COLUMN_LENGTH:75$], key_[$COLUMN_LENGTH:75$]);
+create index IX_D3C00A7A on INTERNATIONAL_Translation (uuid_[$COLUMN_LENGTH:75$], companyId);

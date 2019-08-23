@@ -1,0 +1,11 @@
+Bundle-Name: Common Language Provider Database Service
+GroupId: it.dbb.common.language
+Bundle-SymbolicName: it.dbb.common.language.provider.db.service
+Bundle-Version: 2.0.0
+Liferay-Require-SchemaVersion: 1.0.0
+Liferay-Service: true
+
+Import-Package: com.liferay.portal.kernel.util; version="[8,10)",\
+		com.liferay.portal.kernel.model; version="[2,4)",\
+		com.liferay.portal.kernel.service; version="[1,4)",\
+		*

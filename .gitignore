@@ -3,4 +3,6 @@
 .gradle-wrapper
 **/build
 bundle/*
-sample
+sample/**
+gradle.properties
+liferay.yml
