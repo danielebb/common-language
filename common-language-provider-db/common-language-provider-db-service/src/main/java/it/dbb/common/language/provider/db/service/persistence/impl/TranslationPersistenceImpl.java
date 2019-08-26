@@ -153,14 +153,14 @@ public class TranslationPersistenceImpl
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	@Override
 	public List<Translation> findByUuid(
 		String uuid, int start, int end,
 		OrderByComparator<Translation> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -172,17 +172,20 @@ public class TranslationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid;
-			finderArgs = new Object[] {uuid};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid;
+				finderArgs = new Object[] {uuid};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid;
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
 		List<Translation> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<Translation>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -259,10 +262,14 @@ public class TranslationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -702,14 +709,14 @@ public class TranslationPersistenceImpl
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	@Override
 	public List<Translation> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		OrderByComparator<Translation> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -721,10 +728,13 @@ public class TranslationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByUuid_C;
-			finderArgs = new Object[] {uuid, companyId};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByUuid_C;
+				finderArgs = new Object[] {uuid, companyId};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByUuid_C;
 			finderArgs = new Object[] {
 				uuid, companyId, start, end, orderByComparator
@@ -733,7 +743,7 @@ public class TranslationPersistenceImpl
 
 		List<Translation> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<Translation>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -816,10 +826,14 @@ public class TranslationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1288,14 +1302,14 @@ public class TranslationPersistenceImpl
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	@Override
 	public List<Translation> findByLanguage(
 		String language, int start, int end,
 		OrderByComparator<Translation> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		language = Objects.toString(language, "");
 
@@ -1307,17 +1321,20 @@ public class TranslationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindByLanguage;
-			finderArgs = new Object[] {language};
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByLanguage;
+				finderArgs = new Object[] {language};
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByLanguage;
 			finderArgs = new Object[] {language, start, end, orderByComparator};
 		}
 
 		List<Translation> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<Translation>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
@@ -1394,10 +1411,14 @@ public class TranslationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -1826,21 +1847,25 @@ public class TranslationPersistenceImpl
 	 *
 	 * @param language the language
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching translation, or <code>null</code> if a matching translation could not be found
 	 */
 	@Override
 	public Translation fetchByLanguageKey(
-		String language, String key, boolean retrieveFromCache) {
+		String language, String key, boolean useFinderCache) {
 
 		language = Objects.toString(language, "");
 		key = Objects.toString(key, "");
 
-		Object[] finderArgs = new Object[] {language, key};
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {language, key};
+		}
 
 		Object result = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			result = finderCache.getResult(
 				_finderPathFetchByLanguageKey, finderArgs, this);
 		}
@@ -1904,8 +1929,10 @@ public class TranslationPersistenceImpl
 				List<Translation> list = q.list();
 
 				if (list.isEmpty()) {
-					finderCache.putResult(
-						_finderPathFetchByLanguageKey, finderArgs, list);
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByLanguageKey, finderArgs, list);
+					}
 				}
 				else {
 					Translation translation = list.get(0);
@@ -1916,8 +1943,10 @@ public class TranslationPersistenceImpl
 				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(
-					_finderPathFetchByLanguageKey, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByLanguageKey, finderArgs);
+				}
 
 				throw processException(e);
 			}
@@ -2735,13 +2764,13 @@ public class TranslationPersistenceImpl
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of translations
 	 */
 	@Override
 	public List<Translation> findAll(
 		int start, int end, OrderByComparator<Translation> orderByComparator,
-		boolean retrieveFromCache) {
+		boolean useFinderCache) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2751,17 +2780,20 @@ public class TranslationPersistenceImpl
 			(orderByComparator == null)) {
 
 			pagination = false;
-			finderPath = _finderPathWithoutPaginationFindAll;
-			finderArgs = FINDER_ARGS_EMPTY;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindAll;
+				finderArgs = FINDER_ARGS_EMPTY;
+			}
 		}
-		else {
+		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindAll;
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
 		List<Translation> list = null;
 
-		if (retrieveFromCache) {
+		if (useFinderCache) {
 			list = (List<Translation>)finderCache.getResult(
 				finderPath, finderArgs, this);
 		}
@@ -2811,10 +2843,14 @@ public class TranslationPersistenceImpl
 
 				cacheResult(list);
 
-				finderCache.putResult(finderPath, finderArgs, list);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
 			}
 			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
 
 				throw processException(e);
 			}

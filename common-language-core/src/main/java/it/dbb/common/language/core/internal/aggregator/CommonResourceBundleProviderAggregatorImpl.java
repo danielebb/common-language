@@ -24,6 +24,14 @@ public class CommonResourceBundleProviderAggregatorImpl implements CommonResourc
         return aggregatedResourceBundles.get(locale);
     }
     
+    @Override
+    public ResourceBundle refreshAggregateResourceBundle(Locale locale) {
+        
+        initAggregatedResourceBundle(locale);
+        
+        return getAggregateResourceBundle(locale);
+    }
+    
     @Activate
     protected void activate(BundleContext bundleContext) {
         
@@ -78,10 +86,8 @@ public class CommonResourceBundleProviderAggregatorImpl implements CommonResourc
     
             providers.add(reference);
     
-            Collections.sort(providers);
+            Collections.sort(providers, Collections.reverseOrder());
     
-            commonResourceBundleProvider.changeConsumer(locale -> resourceBundlePublisher.publishResourceBundle(locale, getAggregateResourceBundle(locale)));
-            
             publishResourceBundles(commonResourceBundleProvider);
             
             return commonResourceBundleProvider;
@@ -111,14 +117,12 @@ public class CommonResourceBundleProviderAggregatorImpl implements CommonResourc
             
             for (Locale locale : locales) {
     
-                initAggregatedResourceBundle(locale);
-                
                 if (_log.isDebugEnabled()) {
                     
                     _log.debug("Republishing ResourceBundle for Locale " + locale.toString());
                 }
                 
-                resourceBundlePublisher.publishResourceBundle(locale, getAggregateResourceBundle(locale));
+                resourceBundlePublisher.publishResourceBundle(locale, refreshAggregateResourceBundle(locale));
             }
         }
     }

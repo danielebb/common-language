@@ -9,8 +9,13 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="key" type="String" />
+		<field name="key" type="String" >
+			<validator name="required" />
+		</field>
 		<field name="language" type="String" />
-		<field name="value" type="String" />
+		<field name="value" type="String">
+			<hint name="max-length">4000</hint>
+			<validator name="required" />
+		</field>
 	</model>
 </model-hints>

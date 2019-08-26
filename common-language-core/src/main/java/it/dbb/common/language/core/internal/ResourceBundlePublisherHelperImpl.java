@@ -14,7 +14,7 @@ public class ResourceBundlePublisherHelperImpl implements ResourceBundlePublishe
     @Override
     public void republishLocale(Locale locale) {
         
-        resourceBundlePublisher.publishResourceBundle(locale, commonResourceBundleProviderAggregator.getAggregateResourceBundle(locale));
+        resourceBundlePublisher.publishResourceBundle(locale, commonResourceBundleProviderAggregator.refreshAggregateResourceBundle(locale));
     }
     
     @Reference

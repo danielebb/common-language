@@ -101,14 +101,14 @@ public interface TranslationPersistence extends BasePersistence<Translation> {
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	public java.util.List<Translation> findByUuid(
 		String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Translation>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first translation in the ordered set where uuid = &#63;.
@@ -249,14 +249,14 @@ public interface TranslationPersistence extends BasePersistence<Translation> {
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	public java.util.List<Translation> findByUuid_C(
 		String uuid, long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Translation>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first translation in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -399,14 +399,14 @@ public interface TranslationPersistence extends BasePersistence<Translation> {
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching translations
 	 */
 	public java.util.List<Translation> findByLanguage(
 		String language, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Translation>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Returns the first translation in the ordered set where language = &#63;.
@@ -515,11 +515,11 @@ public interface TranslationPersistence extends BasePersistence<Translation> {
 	 *
 	 * @param language the language
 	 * @param key the key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching translation, or <code>null</code> if a matching translation could not be found
 	 */
 	public Translation fetchByLanguageKey(
-		String language, String key, boolean retrieveFromCache);
+		String language, String key, boolean useFinderCache);
 
 	/**
 	 * Removes the translation where language = &#63; and key = &#63; from the database.
@@ -639,14 +639,14 @@ public interface TranslationPersistence extends BasePersistence<Translation> {
 	 * @param start the lower bound of the range of translations
 	 * @param end the upper bound of the range of translations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of translations
 	 */
 	public java.util.List<Translation> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Translation>
 			orderByComparator,
-		boolean retrieveFromCache);
+		boolean useFinderCache);
 
 	/**
 	 * Removes all the translations from the database.

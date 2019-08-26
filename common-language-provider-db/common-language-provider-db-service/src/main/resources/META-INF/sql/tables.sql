@@ -8,5 +8,5 @@ create table INTERNATIONAL_Translation (
 	modifiedDate DATE null,
 	key_ VARCHAR(75) null,
 	language VARCHAR(75) null,
-	value VARCHAR(75) null
+	value STRING null
 );

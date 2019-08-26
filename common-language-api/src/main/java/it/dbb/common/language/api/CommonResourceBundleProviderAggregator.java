@@ -8,4 +8,5 @@ public interface CommonResourceBundleProviderAggregator {
     ResourceBundle getAggregateResourceBundle(Locale locale);
     
     
+    ResourceBundle refreshAggregateResourceBundle(Locale locale);
 }

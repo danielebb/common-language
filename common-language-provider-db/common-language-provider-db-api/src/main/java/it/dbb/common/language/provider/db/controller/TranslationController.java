@@ -9,5 +9,7 @@ import it.dbb.common.language.provider.db.service.TranslationLocalService;
 public interface TranslationController {
     Translation updateTranslation(TranslationModelContext modelContext, ServiceContext serviceContext) throws PortalException;
     
+    Translation removeTranslation(long translationId) throws PortalException;
+    
     TranslationLocalService dao();
 }
