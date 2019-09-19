@@ -2,6 +2,7 @@ Bundle-Name: Common Language Provider Database Web
 GroupId: it.dbb.common.language
 Bundle-SymbolicName: it.dbb.common.language.provider.db.web
 Bundle-Version: 2.0.0
+Web-ContextPath: /common-language-provider-db-web
 
 Import-Package: com.liferay.portal.kernel.util; version="[8,10)",\
 		*
