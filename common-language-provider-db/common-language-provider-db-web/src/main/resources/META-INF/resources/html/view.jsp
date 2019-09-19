@@ -1,5 +1,9 @@
 <%@include file="init.jsp" %>
 
+<%
+    String mainRequire = (String)renderRequest.getAttribute("common-language-provider-db-web/mainRequire");
+%>
+
 <clay:management-toolbar
     filterDropdownItems="${displayContext.localesDropdownItems}"
     showSearch="${displayContext.showSearch}"
@@ -37,11 +41,33 @@
 
     <liferay-ui:search-container compactEmptyResultsMessage="true" searchContainer="${displayContext.searchContainer}">
 
-        <liferay-ui:search-container-row className="it.dbb.common.language.provider.db.model.Translation" keyProperty="translationId" modelVar="translation" >
+        <liferay-ui:search-container-row className="it.dbb.common.language.provider.db.model.Translation"
+                                         keyProperty="translationId" modelVar="translation"
+                                         rowVar="row" >
 
             <liferay-ui:search-container-column-text name="key" property="key" />
 
-            <liferay-ui:search-container-column-text name="value" property="value" />
+            <liferay-ui:search-container-column-text name="value" >
+
+                <div id="${renderResponse.namespace}valueCol-${row.pos}"></div>
+
+                <aui:script require='<%= mainRequire %>' position="bottom">
+
+                    var componentConfig = {
+
+                        name: 'value',
+                        id: 'value-${row.pos}',
+                        portletNamespace: '${renderResponse.namespace}',
+                        curValue: '${translation.value}',
+                        actionURL: '${displayContext.getEditTranslationURL(translation)}'
+                    }
+
+                    new Main.default('${renderResponse.namespace}valueCol-${row.pos}',
+                            componentConfig);
+
+                </aui:script>
+
+            </liferay-ui:search-container-column-text>
 
             <liferay-ui:search-container-column-text>
 

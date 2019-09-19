@@ -177,6 +177,16 @@ public class TranslationsViewDisplayContext {
         return deleteTranslationURL;
     }
     
+    public ActionURL getUpdateTranslationURL(Translation translation) {
+        
+        ActionURL updateTranslationURL = liferayPortletResponse.createActionURL();
+        updateTranslationURL.getActionParameters().setValue(ActionRequest.ACTION_NAME,TranslationPortletWebKeys.EDIT_TRANSLATION_COMMAND);
+        updateTranslationURL.getActionParameters().setValue("translationId", String.valueOf(translation.getTranslationId()));
+        updateTranslationURL.getActionParameters().setValue("redirect", searchContainer.getIteratorURL().toString());
+        
+        return updateTranslationURL;
+    }
+    
     public ResourceURL getEditTranslationURL(Translation translation) {
     
         ResourceURL editTranslationURL = liferayPortletResponse.createResourceURL();

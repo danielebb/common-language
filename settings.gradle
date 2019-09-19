@@ -1,10 +1,10 @@
-include (
+include(
 
-   'common-language-api',
-   'common-language-core', 
-   'common-language-provider-resource', 
-   'common-language-provider-db', 
-   'common-language-provider-db:common-language-provider-db-api',
-   'common-language-provider-db:common-language-provider-db-service',
-   'common-language-provider-db:common-language-provider-db-web' 
+        'common-language-api',
+        'common-language-core',
+        'common-language-provider-resource',
+        'common-language-provider-db',
+        'common-language-provider-db:common-language-provider-db-api',
+        'common-language-provider-db:common-language-provider-db-service',
+        'common-language-provider-db:common-language-provider-db-web'
 )

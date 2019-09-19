@@ -1,5 +1,7 @@
 package it.dbb.common.language.provider.db.web.internal.portlet.command.render;
 
+import com.liferay.frontend.js.loader.modules.extender.npm.JSPackage;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import it.dbb.common.language.provider.db.service.TranslationLocalService;
 import it.dbb.common.language.provider.db.web.constants.TranslationPortletWebKeys;
@@ -27,6 +29,13 @@ public class ViewRenderCommand implements MVCRenderCommand {
 		TranslationsViewDisplayContext displayContext = new TranslationsViewDisplayContext(renderRequest, renderResponse,
                 translationLocalService);
 		
+		String indexModuleName = npmResolver.resolveModuleName(
+				"common-language-provider-db-web");
+		
+		renderRequest.setAttribute(
+				"common-language-provider-db-web/mainRequire",
+				indexModuleName + " as Main");
+		
 		renderRequest.setAttribute(TranslationsViewDisplayContext.class.getName(), displayContext);
 		
 		return "/html/view.jsp";
@@ -34,4 +43,7 @@ public class ViewRenderCommand implements MVCRenderCommand {
 	
 	 @Reference
 	private TranslationLocalService translationLocalService;
+	
+	@Reference
+	private NPMResolver npmResolver;
 }
