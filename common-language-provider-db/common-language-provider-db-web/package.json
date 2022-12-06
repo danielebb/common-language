@@ -2,7 +2,7 @@
 	"dependencies": {
 		"react": "15.6.2",
 		"react-dom": "15.6.2",
-		"qs": "^6.8.0"
+		"qs": "^6.8.3"
 	},
 	"description": "Common Language Provider DB Portlet",
 	"devDependencies": {
